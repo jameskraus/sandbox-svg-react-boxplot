@@ -10,6 +10,11 @@ const data = [
   { x: 6, y: 9 },
 ]
 
+const invertOutput = ({ x, y }) => ({ x, y: -y + 10 })
+const shiftInput = ({ x, y }) => ({ x: x + 2, y })
+
+const finalData = data.map(invertOutput).map(shiftInput)
+
 const App = ({ data }) => {
   return (
     <svg viewBox="0 0 10 10">
@@ -18,4 +23,4 @@ const App = ({ data }) => {
   )
 }
 
-ReactDOM.render(<App data={data} />, document.getElementById('root'))
+ReactDOM.render(<App data={finalData} />, document.getElementById('root'))
