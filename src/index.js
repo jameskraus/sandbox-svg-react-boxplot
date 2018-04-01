@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import * as d3 from 'd3'
 import './style.css'
 
 const data = [
@@ -10,17 +11,30 @@ const data = [
   { x: 6, y: 9 },
 ]
 
-const invertOutput = ({ x, y }) => ({ x, y: -y + 10 })
-const shiftInput = ({ x, y }) => ({ x: x + 2, y })
-
-const finalData = data.map(invertOutput).map(shiftInput)
-
 const App = ({ data }) => {
+  const [xMin, xMax] = d3.extent(data.map(_ => _.x))
+  const [yMin, yMax] = d3.extent(data.map(_ => _.y))
+
+  const xScale = d3
+    .scaleLinear()
+    .domain([xMin, xMax])
+    .range([0, 10])
+
+  const yScale = d3
+    .scaleLinear()
+    .domain([yMin, yMax])
+    .range([10, 0])
+
+  const transformedData = data.map(({ x, y }) => ({
+    x: xScale(x),
+    y: yScale(y),
+  }))
+
   return (
     <svg viewBox="0 0 10 10">
-      {data.map(({ x, y }) => <circle cx={x} cy={y} r="0.25" />)}
+      {transformedData.map(({ x, y }) => <circle cx={x} cy={y} r="0.25" />)}
     </svg>
   )
 }
 
-ReactDOM.render(<App data={finalData} />, document.getElementById('root'))
+ReactDOM.render(<App data={data} />, document.getElementById('root'))
