@@ -18,12 +18,13 @@ const App = ({ data }) => {
   const xScale = d3
     .scaleLinear()
     .domain([xMin, xMax])
-    .range([0, 10])
+    // [2, 8] instead of [0, 10] to give our graph a little padding
+    .range([2, 8])
 
   const yScale = d3
     .scaleLinear()
     .domain([yMin, yMax])
-    .range([10, 0])
+    .range([8, 2]) // Swapped since the axis is upside down
 
   const transformedData = data.map(({ x, y }) => ({
     x: xScale(x),
