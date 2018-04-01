@@ -13,14 +13,9 @@ const data = [
 const App = ({ data }) => {
   return (
     <svg viewBox="0 0 10 10">
-      {data.map(({ x, y }) => (
-        <circle cx={x} cy={y} r="0.25" />
-      ))}
+      {data.map(({ x, y }) => <circle cx={x} cy={y} r="0.25" />)}
     </svg>
   )
 }
 
-ReactDOM.render(
-  <App data={data} />,
-  document.getElementById('root')
-)
+ReactDOM.render(<App data={data} />, document.getElementById('root'))
