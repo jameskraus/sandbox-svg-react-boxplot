@@ -9,6 +9,7 @@ const App = ({ data }) => {
   // One unit less than the min/max coordinates on our graph
   const minXPos = 1
   const maxXPos = 9
+  const maxYPos = 9
 
   const totalWidth = maxXPos - minXPos
   const widthPerElement = totalWidth / (data.length * 2 - 1)
@@ -34,7 +35,7 @@ const App = ({ data }) => {
   const boxes = data.map((value, i) => {
     const xPos = scalePosition(i)
     const height = scaleValue(value)
-    const yPos = 0
+    const yPos = maxYPos - height
     return {
       xPos,
       yPos,
