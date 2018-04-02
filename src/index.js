@@ -10,10 +10,10 @@ const data = [
   { x: 6, y: 9 },
 ]
 
-const invertOutput = ({ x, y }) => ({ x, y: -y + 10 })
-const shiftInput = ({ x, y }) => ({ x: x + 2, y })
+const transformOutput = ({ x, y }) => ({ x, y: -y + 10 })
+const transformInput = ({ x, y }) => ({ x: x + 2, y })
 
-const finalData = data.map(invertOutput).map(shiftInput)
+const finalData = data.map(transformOutput).map(transformInput)
 
 const App = ({ data }) => {
   return (
